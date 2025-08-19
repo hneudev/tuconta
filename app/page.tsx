@@ -17,32 +17,37 @@ import PackagesModal from "@/components/PackagesModal";
  * Para ejecutar: npm run dev
  */
 
+// Configuration for feature cards displayed in the main section
+// Each card represents a key service offered by tuConta
 const featureCards = [
 	{
 		title: "Hacemos tu contabilidad mensual",
-		iconSrc: "/icons/calculator.png",
+		iconSrc: "/images/calculator_transparent.webp",
 	},
 	{
 		title: "Calculamos tus impuestos",
-		iconSrc: "/icons/percentage.png",
+		iconSrc: "/images/percentage_transparent.webp",
 	},
 	{
 		title: "Presentamos tus declaraciones SAT",
-		iconSrc: "/icons/file-text.png",
+		iconSrc: "/images/file-text_transparent.webp",
 	},
 	{
 		title: "Cálculo, timbrado y envío de nómina",
-		iconSrc: "/icons/dollar.png",
+		iconSrc: "/images/dollar_transparent.webp",
 	},
 ];
 
 export default function Home() {
+	// State to control the packages modal visibility
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
+	// Handler to open the packages modal
 	const handleOpenModal = () => {
 		setIsModalOpen(true);
 	};
 
+	// Handler to close the packages modal
 	const handleCloseModal = () => {
 		setIsModalOpen(false);
 	};
@@ -94,21 +99,17 @@ export default function Home() {
 							</p>
 						</div>
 						<div className='flex flex-col justify-center w-4/5 max-w-4xl gap-4 mx-auto sm:flex-row py-8'>
-							<Button
-								type='primary'
-								size='large'
+							<button
+								type='button'
 								onClick={handleOpenModal}
-								className='w-full rounded-full sm:w-1/2'
-								style={{ backgroundColor: "#38b433", borderColor: "#38b433" }}>
+								className='w-full rounded-full sm:w-1/2 text-white text-lg font-semibold px-6 py-3 whitespace-normal leading-tight btn-cta btn-cta-green'>
 								Ver Paquetes
-							</Button>
-							<Button
-								type='primary'
-								size='large'
-								className='w-full rounded-full sm:w-1/2'
-								style={{ backgroundColor: "#176BFF", borderColor: "#176BFF" }}>
+							</button>
+							<button
+								type='button'
+								className='w-full rounded-full sm:w-1/2 text-white text-lg font-semibold px-6 py-3 whitespace-normal leading-tight btn-cta btn-cta-blue'>
 								Agenda una cita con un contador experto
-							</Button>
+							</button>
 						</div>
 					</div>
 				</div>

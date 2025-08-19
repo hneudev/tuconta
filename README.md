@@ -1,196 +1,169 @@
 # tuConta Landing Page
 
-Una landing page moderna y responsiva para "tuConta - Tu Contador en línea" construida con Next.js 14, TypeScript, Tailwind CSS y Ant Design.
+Una landing page moderna y responsiva para "tuConta - Tu Contador en línea" construida con Next.js 14, TypeScript, Tailwind CSS y Ant Design. La aplicación presenta servicios de contabilidad en línea con un diseño profesional y funcionalidades interactivas.
+
+## ✅ Cumplimiento de la Prueba Técnica (DDM)
+
+- **Estructura (Next.js + componentes reutilizables)**: Código organizado en `app/` y `components/` con piezas reutilizables (`Header`, `FeatureCard`, `VideoEmbed`, `BenefitsList`, `StepsBand`, `PackagesModal`).
+- **Librerías recomendadas**: Uso de **Ant Design** (Modal, Card, etc.) y **RTK Query** para consumo de API.
+- **Estilos (Tailwind, Flexbox/Grid)**: Tailwind CSS para utilidades y responsive. Uso extensivo de **Grid** y **Flex** para layout.
+- **Iconos/Logo**: Iconos e imágenes genéricos optimizados en WebP.
+- **Responsive**: Diseño adaptativo para móvil, tablet y escritorio.
+- **Interactividad**:
+  - 4 cards con efecto hover (sombra y elevación).
+  - Botón "Ver paquetes" abre un **modal centrado** con contenido dinámico.
+  - Modal con **título "Lista de paquetes"**, lista con **nombre, precio y descripción**.
+  - Incluye botón **"Cerrar"** explícito en el footer y cierre por `onCancel`.
+  - Datos obtenidos dinámicamente desde **MockAPI** vía **RTK Query** al abrir el modal.
+- **Video**: Embebido desde **YouTube** (privacy mode) con thumbnail y autoplay al reproducir.
+- **Código y entrega**: Repositorio listo para GitHub/GitLab; deploy deseable (ver instrucciones de ejecución).
 
 ## 🚀 Características
 
-- **Next.js 14** con App Router
-- **TypeScript** para type safety
-- **Tailwind CSS** para estilos responsivos
-- **Ant Design** para componentes UI
+- **Next.js 14** con App Router y Server Components
+- **TypeScript** para type safety y mejor desarrollo
+- **Tailwind CSS** para estilos responsivos y modernos
+- **Ant Design** para componentes UI profesionales
 - **Redux Toolkit + RTK Query** para manejo de estado y API
-- **Diseño responsivo** para móvil, tablet y desktop
-- **Accesibilidad** con ARIA labels y semantic HTML
+- **Vitest + Testing Library** para testing unitario e integración
+- **Diseño responsivo** optimizado para móvil, tablet y desktop
+- **Accesibilidad** con ARIA labels, semantic HTML y focus management
+- **Modal interactivo** con paginación y gestión de estado persistente
+- **Video embebido** de YouTube responsivo
+- **Confirmación de salida** con redirección externa
+- **Optimización de imágenes** con WebP para mejor rendimiento
 
-## 📋 Requisitos Previos
+## 🔧 Configuración de MockAPI
 
-- Node.js 18+
-- npm o yarn
+Por defecto, el proyecto apunta a una instancia de MockAPI. Puedes configurar tu propio endpoint:
+
+1. Crea `.env.local` en la raíz con:
+
+```env
+NEXT_PUBLIC_PACKAGES_API=https://<tu-mockapi>.mockapi.io/api/v1/
+```
+
+2. El servicio construye la URL de consulta como `GET /lista-de-paquetes?page=<n>&limit=<m>`.
+   - Asegúrate de exponer un recurso `lista-de-paquetes` que devuelva un arreglo de objetos con:
+     - `id`, `name`, `price`, `description` (campos mínimos).
+
+Ejemplo de respuesta válida:
+
+```json
+[
+	{ "id": "1", "name": "Paquete Básico", "price": "1000.00", "description": "Incluye acceso a funciones esenciales." },
+	{
+		"id": "2",
+		"name": "Paquete Premium",
+		"price": "2000.00",
+		"description": "Incluye acceso a todas las funciones avanzadas."
+	}
+]
+```
+
+Si tu API responde con otras formas comunes (`{ data: [...] }`, `{ items: [...] }` o `{ result: [...] }`), el transformador las normaliza automáticamente.
+
+## 📚 Documentación adicional
+
+- [Data Fetching (RTK Query)](docs/data-fetching.md)
+- [Uso de Redux en el proyecto](docs/redux-usage.md)
 
 ## 🛠️ Instalación
 
-1. **Clonar el repositorio**
+1. Clonar repo
 
-   ```bash
-   git clone <repository-url>
-   cd tuconta
-   ```
+```bash
+git clone <repository-url>
+cd tuconta
+```
 
-2. **Instalar dependencias**
+2. Instalar deps
 
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
 
-3. **Configurar variables de entorno**
+3. Variables de entorno
 
-   Crea un archivo `.env.local` en la raíz del proyecto:
+```env
+NEXT_PUBLIC_PACKAGES_API=https://<tu-mockapi>.mockapi.io/api/v1/
+```
 
-   ```env
-   NEXT_PUBLIC_PACKAGES_API=https://tu-api-endpoint.com/packages
-   ```
+4. Desarrollo
 
-   Si no configuras esta variable, se usará el endpoint por defecto:
-   `https://mockapi.io/your-endpoint/packages`
+```bash
+npm run dev
+```
 
-4. **Ejecutar en desarrollo**
-
-   ```bash
-   npm run dev
-   ```
-
-5. **Abrir en el navegador**
-
-   La aplicación estará disponible en [http://localhost:3000](http://localhost:3000)
+5. Abrir en `http://localhost:3000`
 
 ## 🏗️ Estructura del Proyecto
 
 ```
 tuconta/
 ├── app/
-│   ├── globals.css          # Estilos globales con Tailwind
-│   ├── layout.tsx           # Layout principal con providers
-│   └── page.tsx             # Página principal
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
 ├── components/
-│   ├── Header.tsx           # Header con logo y subtítulo
-│   ├── FeatureCard.tsx      # Tarjetas de características
-│   ├── VideoEmbed.tsx       # Video de YouTube embebido
-│   ├── BenefitsList.tsx     # Lista de beneficios
-│   ├── StepsBand.tsx        # Banda de pasos (fondo azul)
-│   ├── PackagesModal.tsx    # Modal de paquetes
-│   └── Providers.tsx        # Provider de Redux
+│   ├── Header.tsx
+│   ├── FeatureCard.tsx
+│   ├── VideoEmbed.tsx
+│   ├── BenefitsList.tsx
+│   ├── StepsBand.tsx
+│   ├── PackagesModal.tsx
+│   ├── Providers.tsx
+│   └── CacheCleanup.tsx
 ├── store/
-│   ├── index.ts             # Configuración de Redux store
+│   ├── index.ts
+│   ├── hooks.ts
+│   ├── slices/
+│   │   └── uiSlice.ts
 │   └── services/
-│       └── packagesApi.ts   # RTK Query para API de paquetes
+│       └── packagesApi.ts
 ├── lib/
-│   └── env.ts               # Helper para variables de entorno
-└── public/                  # Assets estáticos
+│   ├── env.ts
+│   ├── safeStorage.ts
+│   └── cacheCleanup.ts
+├── tests/
+│   ├── setupTests.ts
+│   ├── packagesApi.transformResponse.test.ts
+│   ├── PackagesModal.integration.test.tsx
+│   └── safeStorage.test.ts
+└── public/
+    └── images/
 ```
 
 ## 🎨 Componentes Principales
 
-### Header
+- Ver sección previa del README (detallado por componente).
 
-- Logo "tuConta" con branding
-- Subtítulo descriptivo
-- Icono de cierre (no funcional)
+## 📊 Performance Metrics
 
-### Feature Cards (4)
+![Lighthouse Performance Score](/public/msc/Lighthouse.png)
 
-- Hacemos tu contabilidad mensual
-- Calculamos tus impuestos
-- Presentamos tus declaraciones SAT
-- Cálculo, timbrado y envío de nómina
+## 🖼️ UI Comparison
 
-### Video + Benefits
+![UI Comparison](/public/msc/UI_comparison.png)
 
-- Video de YouTube responsivo (16:9)
-- Lista de 4 beneficios con iconos de check
-
-### Steps Band
-
-- 3 pasos con iconos y descripciones
-- Fondo azul con texto blanco
-
-### CTA Section
-
-- Texto de ayuda
-- Botón "Ver paquetes" (abre modal)
-- Botón "Agenda una cita"
-
-### Packages Modal
-
-- Lista de paquetes desde API
-- Estados de carga y error
-- Botón de reintento
-
-## 🔧 Configuración de API
-
-El modal de paquetes consume datos de una API REST. Para configurar:
-
-1. **Variable de entorno:**
-
-   ```env
-   NEXT_PUBLIC_PACKAGES_API=https://tu-api.com/packages
-   ```
-
-2. **Formato de respuesta esperado:**
-   ```json
-   [
-   	{
-   		"id": "1",
-   		"name": "Paquete Básico",
-   		"price": "1000.00",
-   		"description": "Incluye acceso a funciones esenciales."
-   	},
-   	{
-   		"id": "2",
-   		"name": "Paquete Premium",
-   		"price": "2000.00",
-   		"description": "Incluye acceso a todas las funciones avanzadas."
-   	}
-   ]
-   ```
-
-## 📱 Responsividad
-
-- **Desktop:** Layout de 4 columnas para feature cards
-- **Tablet:** Layout de 2 columnas para feature cards
-- **Mobile:** Layout de 1 columna, video arriba de beneficios
-- **Steps Band:** Vertical en móvil, horizontal en desktop
-- **Botones:** Stack vertical en móvil, horizontal en desktop
-
-## 🎯 Funcionalidades
-
-- ✅ Feature cards con hover effects
-- ✅ Modal de paquetes con RTK Query
-- ✅ Video de YouTube responsivo
-- ✅ Diseño completamente responsivo
-- ✅ Accesibilidad con ARIA labels
-- ✅ Estados de carga y error
-- ✅ TypeScript para type safety
-
-## 🚀 Scripts Disponibles
+## 🧪 Testing
 
 ```bash
-npm run dev      # Desarrollo local
-npm run build    # Build de producción
-npm run start    # Servidor de producción
-npm run lint     # Linting con ESLint
+npm run test
+npm run test:watch
 ```
 
-## 🎨 Paleta de Colores
-
-- **Primary:** #176BFF (Azul principal)
-- **Accent:** #2ecc71 (Verde de éxito)
-- **Dark:** #1f2937 (Texto oscuro)
+Incluye: parsing de API, integración del modal y utilidades de almacenamiento.
 
 ## 📝 Notas de Desarrollo
 
-- Todos los componentes usan `'use client'` para interactividad
-- RTK Query maneja automáticamente el cache y re-fetch
-- Tailwind CSS proporciona utilidades para responsive design
-- Ant Design se integra con el tema personalizado
+- Modal con botón "Cerrar" y cierre por `onCancel` (cumple requisito).
+- Respuesta de API normalizada para múltiples formatos comunes.
+- Accesibilidad: ARIA, focus management y navegación por teclado.
+- Cache limpia al salir de la página (`beforeunload`).
+- Imágenes WebP para rendimiento.
 
-## 🤝 Contribución
+## 🚀 Deploy (deseable)
 
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+- Build de producción: `npm run build && npm run start`
+- Puede desplegarse en Vercel, Netlify u otro PaaS.

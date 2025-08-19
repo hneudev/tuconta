@@ -3,6 +3,7 @@ import { Noto_Sans } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { ConfigProvider } from "antd";
+import CacheCleanup from "@/components/CacheCleanup";
 
 const notoSans = Noto_Sans({
 	subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 								colorPrimary: "#176BFF",
 							},
 						}}>
+						<CacheCleanup />
 						{children}
 					</ConfigProvider>
 				</Providers>

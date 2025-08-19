@@ -44,3 +44,28 @@ a {
 	width: 100%;
 	height: 100%;
 }
+
+/* CTA button color utilities (used by app/page.tsx) */
+.btn-cta {
+	color: #fff;
+	border-width: 1px;
+	border-style: solid;
+}
+
+.btn-cta-green {
+	background-color: #38b433;
+	border-color: #38b433;
+}
+.btn-cta-green:hover {
+	background-color: #2fa32b;
+	border-color: #2fa32b;
+}
+
+.btn-cta-blue {
+	background-color: #176bff;
+	border-color: #176bff;
+}
+.btn-cta-blue:hover {
+	background-color: #0f56e6;
+	border-color: #0f56e6;
+}

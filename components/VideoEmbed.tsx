@@ -3,10 +3,16 @@
 import { useState } from "react";
 
 export default function VideoEmbed() {
+	// State to control whether the video is playing or showing thumbnail
 	const [playing, setPlaying] = useState(false);
+
+	// YouTube video ID for the presentation video
 	const videoId = "dQw4w9WgXcQ";
 
-	const thumbnail = "/images/video-preview.png";
+	// Thumbnail image for the video preview
+	const thumbnail = "/images/video-preview.webp";
+
+	// YouTube embed URL with autoplay enabled for privacy-enhanced mode
 	const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
 
 	return (

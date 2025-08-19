@@ -4,17 +4,17 @@ const steps = [
 	{
 		number: "1",
 		title: "Agrega tu FIEL",
-		iconSrc: "/images/step1.png",
+		iconSrc: "/images/step1.webp",
 	},
 	{
 		number: "2",
 		title: "Sincroniza tus cuentas bancarias",
-		iconSrc: "/images/step2.png",
+		iconSrc: "/images/step2.webp",
 	},
 	{
 		number: "3",
 		title: "Recibe mensualmente tu declaración de impuestos",
-		iconSrc: "/images/step3.png",
+		iconSrc: "/images/step3.webp",
 	},
 ];
 
